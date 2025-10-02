@@ -80,6 +80,7 @@ class FridgeController extends Notifier<FridgeState> {
   }
 
   Future<void> fillWithMockData() async {
+    await service.clearAll();
     await service.fillWithMockData();
     state = state.copyWith(items: service.getAll());
   }
