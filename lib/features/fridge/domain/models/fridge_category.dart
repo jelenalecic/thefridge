@@ -1,0 +1,17 @@
+enum FridgeCategory {
+  fruits,
+  vegetables,
+  dairy,
+  meat,
+  fish,
+  seafood,
+  bakery,
+  sweets,
+  beverages,
+  juices,
+  alcohol,
+  condiments,
+  frozen,
+  leftovers,
+  other,
+}
