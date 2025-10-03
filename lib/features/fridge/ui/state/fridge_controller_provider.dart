@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thefridge/features/fridge/data/fridge_local_store.dart';
+import 'package:thefridge/features/fridge/domain/mock/mock_data.dart';
 import 'package:thefridge/features/fridge/domain/models/expiry_filter.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_category.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_status.dart';
@@ -40,6 +41,7 @@ class FridgeController extends Notifier<FridgeState> {
 
   Future<void> addNew({
     required String name,
+    required String id,
     required FridgeCategory category,
     required double quantity,
     required FridgeUnit unit,
@@ -48,7 +50,7 @@ class FridgeController extends Notifier<FridgeState> {
   }) async {
     final now = DateTime.now();
     final newItem = FridgeItem(
-      id: service.newId(),
+      id: id,
       name: name.trim(),
       category: category,
       quantity: quantity,
@@ -81,7 +83,7 @@ class FridgeController extends Notifier<FridgeState> {
 
   Future<void> fillWithMockData() async {
     await service.clearAll();
-    await service.fillWithMockData();
+    await fillInMockData(service);
     state = state.copyWith(items: service.getAll());
   }
 }

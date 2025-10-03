@@ -12,7 +12,6 @@ class RootAppWidget extends ConsumerStatefulWidget {
   @override
   RootWidgetState createState() => RootWidgetState();
 
-  ///get nearest [RootWidgetState] UP in the tree
   static RootWidgetState of(BuildContext context) {
     return context.findAncestorStateOfType<RootWidgetState>()!;
   }

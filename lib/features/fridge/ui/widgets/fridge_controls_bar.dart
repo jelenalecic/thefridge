@@ -91,6 +91,10 @@ class FridgeControlsBar extends ConsumerWidget {
               ),
               child: DropdownMenu<SortBy>(
                 initialSelection: state.sortBy,
+                trailingIcon: Icon(
+                  Icons.arrow_drop_down_rounded,
+                  color: primaryText,
+                ),
                 onSelected: (v) => v != null ? controller.setSort(v) : null,
                 dropdownMenuEntries: [
                   DropdownMenuEntry(
