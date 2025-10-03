@@ -9,8 +9,11 @@ enum FridgeCategory {
   fruits,
   sweets,
   juices,
-  leftover,
   beverage,
+  grains,
+  condiments,
+  frozen,
+  leftover,
   other,
 }
 
@@ -28,15 +31,21 @@ extension FridgeCategoryIcon on FridgeCategory {
       case FridgeCategory.fruits:
         return FontAwesomeIcons.appleWhole;
       case FridgeCategory.sweets:
-        return FontAwesomeIcons.cakeCandles;
+        return FontAwesomeIcons.cookieBite;
       case FridgeCategory.juices:
         return FontAwesomeIcons.bottleWater;
-      case FridgeCategory.leftover:
-        return FontAwesomeIcons.box;
       case FridgeCategory.beverage:
         return FontAwesomeIcons.mugHot;
+      case FridgeCategory.grains:
+        return FontAwesomeIcons.breadSlice;
+      case FridgeCategory.condiments:
+        return FontAwesomeIcons.bottleDroplet;
+      case FridgeCategory.frozen:
+        return FontAwesomeIcons.snowflake;
+      case FridgeCategory.leftover:
+        return FontAwesomeIcons.box;
       case FridgeCategory.other:
-        return FontAwesomeIcons.question;
+        return FontAwesomeIcons.utensils;
     }
   }
 }

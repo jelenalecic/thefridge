@@ -49,7 +49,7 @@ class FridgeService {
     final now = DateTime.now();
 
     final mocks = <FridgeItem>[
-      // Dairy & Meat
+      // Dairy
       FridgeItem(
         id: newId(),
         name: 'Milk',
@@ -58,25 +58,6 @@ class FridgeService {
         unit: FridgeUnit.l,
         dateAdded: now.subtract(const Duration(days: 1)),
         bestBefore: now.add(const Duration(days: 3)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Chicken breast',
-        category: FridgeCategory.meat,
-        quantity: 500,
-        unit: FridgeUnit.g,
-        dateAdded: now.subtract(const Duration(days: 3)),
-        bestBefore: now.subtract(const Duration(days: 1)),
-        note: 'Should have been cooked yesterday',
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Greek yogurt',
-        category: FridgeCategory.dairy,
-        quantity: 2,
-        unit: FridgeUnit.pcs,
-        dateAdded: now.subtract(const Duration(days: 2)),
-        bestBefore: now.add(const Duration(days: 1)),
       ),
       FridgeItem(
         id: newId(),
@@ -89,12 +70,32 @@ class FridgeService {
       ),
       FridgeItem(
         id: newId(),
+        name: 'Greek yogurt',
+        category: FridgeCategory.dairy,
+        quantity: 2,
+        unit: FridgeUnit.pcs,
+        dateAdded: now.subtract(const Duration(days: 2)),
+        bestBefore: now.add(const Duration(days: 1)),
+      ),
+      FridgeItem(
+        id: newId(),
         name: 'Eggs',
         category: FridgeCategory.dairy,
         quantity: 10,
         unit: FridgeUnit.pcs,
         dateAdded: now,
         bestBefore: now.add(const Duration(days: 12)),
+      ),
+
+      // Meat & Fish
+      FridgeItem(
+        id: newId(),
+        name: 'Chicken breast',
+        category: FridgeCategory.meat,
+        quantity: 500,
+        unit: FridgeUnit.g,
+        dateAdded: now.subtract(const Duration(days: 3)),
+        bestBefore: now.subtract(const Duration(days: 1)),
       ),
       FridgeItem(
         id: newId(),
@@ -105,26 +106,17 @@ class FridgeService {
         dateAdded: now.subtract(const Duration(days: 1)),
         bestBefore: now.add(const Duration(days: 5)),
       ),
-
-      // Vegetables & Fruits
       FridgeItem(
         id: newId(),
-        name: 'Spinach',
-        category: FridgeCategory.vegetables,
-        quantity: 200,
-        unit: FridgeUnit.g,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 5)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Broccoli',
-        category: FridgeCategory.vegetables,
-        quantity: 1,
+        name: 'Salmon fillet',
+        category: FridgeCategory.fish,
+        quantity: 2,
         unit: FridgeUnit.pcs,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 5)),
+        bestBefore: now.add(const Duration(days: 3)),
       ),
+
+      // Vegetables
       FridgeItem(
         id: newId(),
         name: 'Carrots',
@@ -145,39 +137,32 @@ class FridgeService {
       ),
       FridgeItem(
         id: newId(),
-        name: 'Cucumber',
+        name: 'Spinach',
         category: FridgeCategory.vegetables,
-        quantity: 2,
-        unit: FridgeUnit.pcs,
+        quantity: 200,
+        unit: FridgeUnit.g,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 7)),
+        bestBefore: now.add(const Duration(days: 5)),
       ),
       FridgeItem(
         id: newId(),
-        name: 'Lettuce',
+        name: 'Broccoli',
         category: FridgeCategory.vegetables,
         quantity: 1,
         unit: FridgeUnit.pcs,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 4)),
+        bestBefore: now.add(const Duration(days: 5)),
       ),
+
+      // Fruits
       FridgeItem(
         id: newId(),
-        name: 'Lemon',
+        name: 'Apples',
         category: FridgeCategory.fruits,
         quantity: 1,
         unit: FridgeUnit.kg,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 14)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Avocado',
-        category: FridgeCategory.fruits,
-        quantity: 3,
-        unit: FridgeUnit.pcs,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 4)),
+        bestBefore: now.add(const Duration(days: 20)),
       ),
       FridgeItem(
         id: newId(),
@@ -199,24 +184,73 @@ class FridgeService {
       ),
       FridgeItem(
         id: newId(),
-        name: 'Apples',
+        name: 'Lemon',
         category: FridgeCategory.fruits,
         quantity: 1,
         unit: FridgeUnit.kg,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 20)),
+        bestBefore: now.add(const Duration(days: 14)),
       ),
+
+      // Grains
       FridgeItem(
         id: newId(),
-        name: 'Blueberries',
-        category: FridgeCategory.fruits,
-        quantity: 150,
-        unit: FridgeUnit.g,
+        name: 'Bread',
+        category: FridgeCategory.grains,
+        quantity: 1,
+        unit: FridgeUnit.loaf,
         dateAdded: now,
         bestBefore: now.add(const Duration(days: 3)),
       ),
+      FridgeItem(
+        id: newId(),
+        name: 'Rice',
+        category: FridgeCategory.grains,
+        quantity: 1,
+        unit: FridgeUnit.kg,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 365)),
+      ),
+      FridgeItem(
+        id: newId(),
+        name: 'Pasta',
+        category: FridgeCategory.grains,
+        quantity: 500,
+        unit: FridgeUnit.g,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 365)),
+      ),
 
-      // Drinks
+      // Condiments
+      FridgeItem(
+        id: newId(),
+        name: 'Olive oil',
+        category: FridgeCategory.condiments,
+        quantity: 1,
+        unit: FridgeUnit.bottle,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 730)),
+      ),
+      FridgeItem(
+        id: newId(),
+        name: 'Ketchup',
+        category: FridgeCategory.condiments,
+        quantity: 1,
+        unit: FridgeUnit.bottle,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 180)),
+      ),
+      FridgeItem(
+        id: newId(),
+        name: 'Soy sauce',
+        category: FridgeCategory.condiments,
+        quantity: 1,
+        unit: FridgeUnit.bottle,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 365)),
+      ),
+
+      // Juices & Beverages
       FridgeItem(
         id: newId(),
         name: 'Orange juice',
@@ -225,24 +259,6 @@ class FridgeService {
         unit: FridgeUnit.l,
         dateAdded: now.subtract(const Duration(days: 1)),
         bestBefore: now.add(const Duration(days: 7)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Cola',
-        category: FridgeCategory.beverage,
-        quantity: 2,
-        unit: FridgeUnit.bottle,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 180)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Sparkling water',
-        category: FridgeCategory.beverage,
-        quantity: 6,
-        unit: FridgeUnit.bottle,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 365)),
       ),
       FridgeItem(
         id: newId(),
@@ -262,8 +278,26 @@ class FridgeService {
         dateAdded: now,
         bestBefore: now.add(const Duration(days: 365)),
       ),
+      FridgeItem(
+        id: newId(),
+        name: 'Coffee beans',
+        category: FridgeCategory.beverage,
+        quantity: 500,
+        unit: FridgeUnit.g,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 300)),
+      ),
+      FridgeItem(
+        id: newId(),
+        name: 'Green tea',
+        category: FridgeCategory.beverage,
+        quantity: 20,
+        unit: FridgeUnit.pack,
+        dateAdded: now,
+        bestBefore: now.add(const Duration(days: 400)),
+      ),
 
-      // Sweets & Other
+      // Sweets
       FridgeItem(
         id: newId(),
         name: 'Chocolate',
@@ -271,16 +305,7 @@ class FridgeService {
         quantity: 1,
         unit: FridgeUnit.pack,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 90)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Cake',
-        category: FridgeCategory.sweets,
-        quantity: 1,
-        unit: FridgeUnit.pcs,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 2)),
+        bestBefore: now.add(const Duration(days: 180)),
       ),
       FridgeItem(
         id: newId(),
@@ -301,69 +326,35 @@ class FridgeService {
         bestBefore: now.add(const Duration(days: 30)),
       ),
 
-      // Ready meals
+      // Frozen
       FridgeItem(
         id: newId(),
-        name: 'Greek moussaka',
-        category: FridgeCategory.other,
+        name: 'Frozen pizza',
+        category: FridgeCategory.frozen,
         quantity: 1,
         unit: FridgeUnit.pcs,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 2)),
+        bestBefore: now.add(const Duration(days: 180)),
       ),
       FridgeItem(
         id: newId(),
-        name: 'Pizza',
-        category: FridgeCategory.other,
-        quantity: 1,
-        unit: FridgeUnit.pcs,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 1)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Mushroom soup',
-        category: FridgeCategory.other,
-        quantity: 500,
-        unit: FridgeUnit.ml,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 3)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Chicken soup',
-        category: FridgeCategory.other,
-        quantity: 500,
-        unit: FridgeUnit.ml,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 3)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Lasagna',
-        category: FridgeCategory.other,
-        quantity: 1,
-        unit: FridgeUnit.pcs,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 2)),
-      ),
-      FridgeItem(
-        id: newId(),
-        name: 'Sushi box',
-        category: FridgeCategory.other,
+        name: 'Frozen peas',
+        category: FridgeCategory.frozen,
         quantity: 1,
         unit: FridgeUnit.pack,
         dateAdded: now,
-        bestBefore: now.add(const Duration(days: 1)),
+        bestBefore: now.add(const Duration(days: 240)),
       ),
+
+      // Leftovers
       FridgeItem(
         id: newId(),
-        name: 'Hummus',
-        category: FridgeCategory.other,
-        quantity: 200,
-        unit: FridgeUnit.g,
-        dateAdded: now,
-        bestBefore: now.add(const Duration(days: 7)),
+        name: 'Yesterday pasta',
+        category: FridgeCategory.leftover,
+        quantity: 1,
+        unit: FridgeUnit.box,
+        dateAdded: now.subtract(const Duration(days: 1)),
+        bestBefore: now.add(const Duration(days: 1)),
       ),
     ];
 

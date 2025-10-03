@@ -6,7 +6,7 @@ class FridgeLocalStore {
 
   Future<List<FridgeItem>> loadAllItems() async {
     //fake wait
-    await Future.delayed(Duration(seconds: 1),(){});
+    await Future.delayed(Duration(seconds: 1), () {});
     final prefs = await SharedPreferences.getInstance();
     final encodedItems = prefs.getStringList(_storageKey) ?? [];
     final decodedItems = encodedItems

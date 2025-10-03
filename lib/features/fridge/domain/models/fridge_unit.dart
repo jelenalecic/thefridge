@@ -1,4 +1,4 @@
-enum FridgeUnit { pcs, g, kg, ml, l, pack, slice, bottle, can, jar }
+enum FridgeUnit { pcs, g, kg, ml, l, pack, slice, bottle, can, jar, loaf, box }
 
 extension FridgeUnitLabel on FridgeUnit {
   String get label {
@@ -23,6 +23,10 @@ extension FridgeUnitLabel on FridgeUnit {
         return 'can';
       case FridgeUnit.jar:
         return 'jar';
+      case FridgeUnit.loaf:
+        return 'loaf';
+      case FridgeUnit.box:
+        return 'box';
     }
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:thefridge/core/theming/app_theme.dart';
-import 'package:thefridge/core/theming/color_theme.dart';
-import 'package:thefridge/core/theming/colors.dart';
+import 'package:thefridge/core/coloring/app_theme.dart';
+import 'package:thefridge/core/coloring/color_theme.dart';
+import 'package:thefridge/core/coloring/colors.dart';
 import 'package:thefridge/root_app_widget.dart';
 
 class ThemeService {

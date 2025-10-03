@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thefridge/core/theming/app_theme.dart';
-import 'package:thefridge/core/theming/colors.dart';
-import 'package:thefridge/core/theming/theme_service.dart';
-import 'package:thefridge/features/fridge/domain/models/expiry_filter.dart';
-import 'package:thefridge/features/fridge/domain/models/sort_filter.dart';
+import 'package:thefridge/core/coloring/app_theme.dart';
+import 'package:thefridge/core/coloring/colors.dart';
+import 'package:thefridge/core/coloring/theme_service.dart';
+import 'package:thefridge/features/fridge/domain/models/fridge_item.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_status.dart';
 import 'package:thefridge/features/fridge/ui/state/fridge_provider.dart';
+import 'package:thefridge/features/fridge/ui/widgets/fridge_controls_bar.dart';
 import 'package:thefridge/features/fridge/ui/widgets/fridge_grid_widget.dart';
 
 class FridgeScreen extends ConsumerStatefulWidget {
@@ -31,55 +31,27 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: surface,
-        title: Text('TheFridge', style: TextStyle(color: primaryText)),
+        backgroundColor: accent,
+        title: Text(
+          'TheFridge',
+          style: TextStyle(color: appBarText, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             color: Colors.pink,
-            icon: Icon(Icons.dark_mode, color: primaryText),
+            icon: Icon(Icons.dark_mode, color: appBarText),
             onPressed: () {
               ThemeService.setTheme(AppThemeType.dark, context);
             },
           ),
           IconButton(
-            icon: Icon(Icons.light_mode, color: primaryText),
+            icon: Icon(Icons.light_mode, color: appBarText),
             onPressed: () {
               ThemeService.setTheme(AppThemeType.light, context);
             },
           ),
-          IconButton(
-            tooltip: 'Clear all',
-            color: primaryText,
-            onPressed: () async {
-              final messenger = ScaffoldMessenger.of(context);
-              final shouldClear = await showDialog<bool>(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: const Text('Remove all items from the fridge?'),
-                  content: const Text(
-                    'This will remove all items from the fridge.',
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, false),
-                      child: const Text('Cancel'),
-                    ),
-                    FilledButton(
-                      onPressed: () => Navigator.pop(context, true),
-                      child: const Text('Perform clearing'),
-                    ),
-                  ],
-                ),
-              );
-              if (shouldClear == true) {
-                await ref.read(fridgeControllerProvider.notifier).clearAll();
-                messenger.showSnackBar(
-                  const SnackBar(content: Text('Fridge cleared')),
-                );
-              }
-            },
-            icon: const Icon(Icons.delete_forever),
-          ),
+
+          _buildOptionsMenu(),
           const SizedBox(width: 8),
         ],
       ),
@@ -108,74 +80,93 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: 8),
-                  const _ControlsBar(),
+                  FridgeControlsBar(key: UniqueKey()),
                   const SizedBox(height: 8),
-                  Expanded(child: FridgeGridWidget(items: state.visible)),
+                  Expanded(
+                    child: FridgeGridWidget(
+                      items: state.visible,
+                      onItemLongPressed: (FridgeItem item) {
+                        askIfUserWantsToDelete(item);
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
     );
   }
-}
 
-class _ControlsBar extends ConsumerWidget {
-  const _ControlsBar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(fridgeControllerProvider);
-    final controller = ref.read(fridgeControllerProvider.notifier);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  tooltip: 'All',
-                  isSelected: state.filter == ExpiryFilter.all,
-                  onPressed: () => controller.setFilter(ExpiryFilter.all),
-                  icon: const Icon(Icons.all_inclusive),
-                ),
-                IconButton(
-                  tooltip: 'Soon',
-                  isSelected: state.filter == ExpiryFilter.soon,
-                  onPressed: () => controller.setFilter(ExpiryFilter.soon),
-                  icon: const Icon(Icons.access_time),
-                ),
-                IconButton(
-                  tooltip: 'Expired',
-                  isSelected: state.filter == ExpiryFilter.expired,
-                  onPressed: () => controller.setFilter(ExpiryFilter.expired),
-                  icon: const Icon(Icons.warning_amber),
-                ),
-              ],
-            ),
+  Widget _buildOptionsMenu() {
+    return PopupMenuButton(
+      icon: Icon(Icons.more_vert, size: 20, color: appBarText),
+      color: accent,
+      surfaceTintColor: appBarText,
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+          onTap: () {
+            performClearing();
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Icon(Icons.delete_forever, color: appBarText),
+              Text('Clear the fridge', style: TextStyle(color: appBarText)),
+            ],
           ),
-          const SizedBox(width: 12),
-          DropdownButtonHideUnderline(
-            child: DropdownButton<SortBy>(
-              value: state.sortBy,
-              onChanged: (v) {
-                if (v != null) controller.setSort(v);
-              },
-              items: const [
-                DropdownMenuItem(
-                  value: SortBy.bestBefore,
-                  child: Text('Best before'),
-                ),
-                DropdownMenuItem(
-                  value: SortBy.timeStored,
-                  child: Text('Time stored'),
-                ),
-              ],
-            ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> performClearing() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final shouldClear = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Remove all items from the fridge?'),
+        content: const Text('This will remove all items from the fridge.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Perform clearing'),
           ),
         ],
       ),
     );
+    if (shouldClear == true) {
+      await ref.read(fridgeControllerProvider.notifier).clearAll();
+      messenger.showSnackBar(const SnackBar(content: Text('Fridge cleared')));
+    }
+  }
+
+  void askIfUserWantsToDelete(FridgeItem item) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Are you sure you want to delete ${item.name}?'),
+        content: const Text(
+          'This will remove this item from the fridge permanently.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+    if (shouldDelete == true) {
+      ref.read(fridgeControllerProvider.notifier).delete(item.id);
+      messenger.showSnackBar(const SnackBar(content: Text('Item deleted.')));
+    }
   }
 }
