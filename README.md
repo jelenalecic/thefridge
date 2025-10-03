@@ -1,16 +1,34 @@
-# thefridge
+# TheFridge
 
-A happy place :)
+Flutter application for tracking items stored in a fridge.  
+Built as part of the Hylastix candidate test.
 
-## Getting Started
+## What it does
+- Keeps track of items by added date and best-before date
+- Displays items by category with icons
+- Supports filtering and sorting (e.g. expiring soon, expired, fresh)
+- Shows item details in a clean UI
 
-This project is a starting point for a Flutter application.
+Focus was on the **frontend** – Flutter with Riverpod for state management.
 
-A few resources to get you started if this is your first Flutter project:
+## Demo
+👉 [YouTube video](https://www.youtube.com/shorts/3TpIgeU3PTM)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[![Watch the demo](https://img.youtube.com/vi/3TpIgeU3PTM/0.jpg)](https://www.youtube.com/shorts/3TpIgeU3PTM)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tech
+- Flutter (Dart)
+- Riverpod for state management
+- SharedPreferences to simulate backend storage
+- Font Awesome icons
+- Light/dark theme support
+
+## GitHub workflow
+- Worked on separate feature branches
+- Opened **pull requests** for merging
+- This kept changes organized and history clear
+
+## Run locally
+```bash
+flutter pub get
+flutter run
