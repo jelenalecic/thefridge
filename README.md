@@ -1,32 +1,41 @@
 # TheFridge
 
-Flutter application for tracking items stored in a fridge.  
-Built as part of the Hylastix candidate test.
+Flutter app for tracking fridge items.  
+Built for the Hylastix candidate test – focus on **frontend**.
+
+---
 
 ## What it does
-- Keeps track of items by added date and best-before date
-- Displays items by category with icons
-- Supports filtering and sorting (e.g. expiring soon, expired, fresh)
-- Shows item details in a clean UI
+- Track items by added date and best-before date
+- Categories with icons
+- Filter and sort (expiring soon / expired / fresh)
+- Item details in a simple dialog
+- Light / dark theme support
 
-Focus was on the **frontend** – Flutter with Riverpod for state management.
+---
 
 ## Demo
-👉 [YouTube video](https://www.youtube.com/shorts/3TpIgeU3PTM)
+👉 [YouTube video](https://www.youtube.com/watch?v=3TpIgeU3PTM)
 
-[![Watch the demo](https://img.youtube.com/vi/3TpIgeU3PTM/0.jpg)](https://www.youtube.com/shorts/3TpIgeU3PTM)
+[![Watch the demo](https://img.youtube.com/vi/3TpIgeU3PTM/0.jpg)](https://www.youtube.com/watch?v=3TpIgeU3PTM)
+
+---
 
 ## Tech
-- Flutter (Dart)
-- Riverpod for state management
-- SharedPreferences to simulate backend storage
-- Font Awesome icons
-- Light/dark theme support
+- **Flutter (Dart)**
+- **Riverpod** for state management
+- **SharedPreferences** as local persistence (fake backend)
+- **Font Awesome** for icons
+- Simple theming system (light/dark)
+
+---
 
 ## GitHub workflow
-- Worked on separate feature branches
-- Opened **pull requests** for merging
-- This kept changes organized and history clear
+- Work split into feature branches
+- Pull requests used for merging
+- Clear history of incremental changes
+
+---
 
 ## Run locally
 ```bash
