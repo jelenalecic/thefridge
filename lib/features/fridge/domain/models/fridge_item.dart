@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_category.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_unit.dart';
 
@@ -83,4 +84,14 @@ class FridgeItem {
 
   factory FridgeItem.fromJson(String source) =>
       FridgeItem.fromMap(jsonDecode(source) as Map<String, dynamic>);
+
+  Color getColor() {
+    if (isExpired) {
+      return Colors.red;
+    } else if (daysLeft != null && daysLeft! <= 3) {
+      return Colors.orange;
+    } else {
+      return Colors.green;
+    }
+  }
 }
