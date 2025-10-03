@@ -28,6 +28,8 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(fridgeControllerProvider);
+    final hasAnyItems = state.items.isNotEmpty;
+    final hasVisible = state.visible.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -63,8 +65,38 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
             )
           : state.status == FridgeStatus.error
           ? Center(child: Text(state.errorMessage ?? 'Unknown error'))
-          : state.visible.isEmpty
+          : hasAnyItems
           ? Container(
+              color: surface,
+              child: Column(
+                children: [
+                  const SizedBox(height: 8),
+                  FridgeControlsBar(key: UniqueKey()),
+                  const SizedBox(height: 8),
+                  hasVisible
+                      ? Expanded(
+                          child: FridgeGridWidget(
+                            items: state.visible,
+                            onItemPressed: (FridgeItem item) {},
+                            onItemLongPressed: (FridgeItem item) {
+                              askIfUserWantsToDelete(item);
+                            },
+                          ),
+                        )
+                      : Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'No items for selected filters',
+                              style: TextStyle(color: primaryText),
+                            ),
+                          ),
+                        ),
+                  const SizedBox(height: 12),
+                ],
+              ),
+            )
+          : Container(
               alignment: Alignment.center,
               color: surface,
               child: FilledButton.icon(
@@ -73,24 +105,6 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
                     .fillWithMockData(),
                 icon: const Icon(Icons.auto_fix_high),
                 label: const Text('Fill the fridge in'),
-              ),
-            )
-          : Container(
-              color: surface,
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
-                  FridgeControlsBar(key: UniqueKey()),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    child: FridgeGridWidget(
-                      items: state.visible,
-                      onItemLongPressed: (FridgeItem item) {
-                        askIfUserWantsToDelete(item);
-                      },
-                    ),
-                  ),
-                ],
               ),
             ),
     );
@@ -166,7 +180,7 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
     );
     if (shouldDelete == true) {
       ref.read(fridgeControllerProvider.notifier).delete(item.id);
-      messenger.showSnackBar(const SnackBar(content: Text('Item deleted.')));
+      messenger.showSnackBar(SnackBar(content: Text('${item.name} deleted.')));
     }
   }
 }
