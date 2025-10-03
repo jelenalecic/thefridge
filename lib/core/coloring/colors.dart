@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thefridge/core/theming/color_theme.dart';
+import 'package:thefridge/core/coloring/color_theme.dart';
 
 late ColorTheme currentTheme;
 
@@ -8,9 +8,15 @@ Color get appColor => currentTheme.appColor;
 
 Color get background => currentTheme.background;
 
+Color get shadow => currentTheme.shadow;
+
+Color get appBarText => currentTheme.appBarText;
+
 Color get surface => currentTheme.surface;
 
 Color get card => currentTheme.card;
+
+Color get accent => currentTheme.accent;
 
 // text
 Color get primaryText => currentTheme.primaryText;

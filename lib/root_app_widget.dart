@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:thefridge/core/coloring/colors.dart';
 import 'package:thefridge/features/fridge/ui/widgets/fridge_overview_screen.dart'
     show FridgeScreen;
 
@@ -33,7 +34,17 @@ class RootWidgetState extends ConsumerState<RootAppWidget> {
     return MaterialApp(
       title: 'TheFridge',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        colorScheme: ColorScheme.fromSeed(seedColor: accent, shadow: shadow),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          inputDecorationTheme: const InputDecorationTheme(filled: true),
+          menuStyle: MenuStyle(
+            backgroundColor: WidgetStateProperty.resolveWith<Color?>((
+              Set<WidgetState> states,
+            ) {
+              return accent; // default
+            }),
+          ),
+        ),
         useMaterial3: true,
       ),
       home: ProviderScope(child: FridgeScreen()),

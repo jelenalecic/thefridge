@@ -6,13 +6,17 @@ class ColorTheme {
   final Color surface;
   final Color card;
   final Color primaryText;
+  final Color appBarText;
   final Color secondaryText;
   final Color success;
   final Color warning;
   final Color error;
+  final Color shadow;
+  final Color accent;
 
   const ColorTheme({
     required this.appColor,
+    required this.appBarText,
     required this.background,
     required this.surface,
     required this.card,
@@ -21,6 +25,8 @@ class ColorTheme {
     required this.success,
     required this.warning,
     required this.error,
+    required this.shadow,
+    required this.accent,
   });
 }
 
@@ -30,10 +36,13 @@ final lightTheme = ColorTheme(
   surface: Colors.grey.shade100,
   card: Colors.white,
   primaryText: Colors.black,
+  appBarText: Colors.white,
   secondaryText: Colors.grey.shade600,
   success: Colors.green,
   warning: Colors.orange,
   error: Colors.red,
+  shadow: Colors.grey,
+  accent: Color(0xFFA741CA),
 );
 
 final darkTheme = ColorTheme(
@@ -41,11 +50,14 @@ final darkTheme = ColorTheme(
   background: Colors.black,
   surface: Colors.grey.shade900,
   card: Colors.grey.shade800,
+  appBarText: Colors.white,
   primaryText: Colors.white,
   secondaryText: Colors.grey.shade400,
   success: Colors.greenAccent,
   warning: Colors.orangeAccent,
   error: Colors.redAccent,
+  shadow: Colors.grey,
+  accent: Colors.blue,
 );
 
 extension ColorExtension on Color {
