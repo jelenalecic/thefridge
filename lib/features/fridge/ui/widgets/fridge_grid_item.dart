@@ -21,7 +21,7 @@ class FridgeGridItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              badge(item),
+              stripe(item),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -31,7 +31,7 @@ class FridgeGridItem extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       '${item.quantity} ${item.unit.label}',
-                      style: TextStyle(color: primaryText, fontSize: 12),
+                      style: TextStyle(color: primaryText, fontSize: 14),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -49,7 +49,7 @@ class FridgeGridItem extends StatelessWidget {
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
-                      color: item.getColor(),
+                      color: item.getColor().withValues(alpha: 0.5),
                       shape: BoxShape.circle,
                     ),
                     child: Stack(
@@ -77,9 +77,9 @@ class FridgeGridItem extends StatelessWidget {
     );
   }
 
-  Widget badge(FridgeItem item) {
+  Widget stripe(FridgeItem item) {
     return Container(
-      height: 12,
+      height: 8,
       decoration: BoxDecoration(
         color: item.getColor().withValues(alpha: 0.8),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),

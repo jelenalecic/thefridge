@@ -5,7 +5,6 @@ import 'package:thefridge/core/theming/colors.dart';
 import 'package:thefridge/core/theming/theme_service.dart';
 import 'package:thefridge/features/fridge/domain/models/expiry_filter.dart';
 import 'package:thefridge/features/fridge/domain/models/sort_filter.dart';
-import 'package:thefridge/features/fridge/domain/models/fridge_item.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_status.dart';
 import 'package:thefridge/features/fridge/ui/state/fridge_provider.dart';
 import 'package:thefridge/features/fridge/ui/widgets/fridge_grid_widget.dart';
@@ -30,21 +29,13 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(fridgeControllerProvider);
 
-    if (state.status == FridgeStatus.loading) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
-    if (state.status == FridgeStatus.error) {
-      return Scaffold(
-        body: Center(child: Text(state.errorMessage ?? 'Unknown error')),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: surface,
         title: Text('TheFridge', style: TextStyle(color: primaryText)),
         actions: [
           IconButton(
+            color: Colors.pink,
             icon: Icon(Icons.dark_mode, color: primaryText),
             onPressed: () {
               ThemeService.setTheme(AppThemeType.dark, context);
@@ -92,7 +83,15 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
           const SizedBox(width: 8),
         ],
       ),
-      body: state.visible.isEmpty
+      body: state.status == FridgeStatus.loading
+          ? Container(
+              color: surface,
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            )
+          : state.status == FridgeStatus.error
+          ? Center(child: Text(state.errorMessage ?? 'Unknown error'))
+          : state.visible.isEmpty
           ? Container(
               alignment: Alignment.center,
               color: surface,
@@ -111,7 +110,7 @@ class _FridgeScreenState extends ConsumerState<FridgeScreen> {
                   const SizedBox(height: 8),
                   const _ControlsBar(),
                   const SizedBox(height: 8),
-                  Expanded(child: _FridgeGrid(items: state.visible)),
+                  Expanded(child: FridgeGridWidget(items: state.visible)),
                 ],
               ),
             ),
@@ -178,16 +177,5 @@ class _ControlsBar extends ConsumerWidget {
         ],
       ),
     );
-  }
-}
-
-class _FridgeGrid extends StatelessWidget {
-  const _FridgeGrid({required this.items});
-
-  final List<FridgeItem> items;
-
-  @override
-  Widget build(BuildContext context) {
-    return FridgeGridWidget(items: items);
   }
 }

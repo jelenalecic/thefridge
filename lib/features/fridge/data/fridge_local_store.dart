@@ -5,6 +5,8 @@ class FridgeLocalStore {
   static const String _storageKey = 'thefridge.items.v1';
 
   Future<List<FridgeItem>> loadAllItems() async {
+    //fake wait
+    await Future.delayed(Duration(seconds: 1),(){});
     final prefs = await SharedPreferences.getInstance();
     final encodedItems = prefs.getStringList(_storageKey) ?? [];
     final decodedItems = encodedItems
