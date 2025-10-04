@@ -5,9 +5,9 @@ import 'package:thefridge/core/coloring/colors.dart';
 import 'package:thefridge/core/coloring/theme_service.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_item.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_status.dart';
-import 'package:thefridge/features/fridge/ui/state/fridge_provider.dart';
-import 'package:thefridge/features/fridge/ui/widgets/fridge_controls_bar.dart';
-import 'package:thefridge/features/fridge/ui/widgets/fridge_grid_widget.dart';
+import 'package:thefridge/features/fridge/presentation/state/fridge_provider.dart';
+import 'package:thefridge/features/fridge/presentation/widgets/fridge_controls_bar.dart';
+import 'package:thefridge/features/fridge/presentation/widgets/fridge_grid_widget.dart';
 
 class FridgeScreen extends ConsumerStatefulWidget {
   const FridgeScreen({super.key});

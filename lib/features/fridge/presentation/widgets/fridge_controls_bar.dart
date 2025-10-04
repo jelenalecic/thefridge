@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thefridge/core/coloring/colors.dart';
 import 'package:thefridge/features/fridge/domain/models/expiry_filter.dart';
 import 'package:thefridge/features/fridge/domain/models/sort_filter.dart';
-import 'package:thefridge/features/fridge/ui/state/fridge_provider.dart';
+import 'package:thefridge/features/fridge/presentation/state/fridge_provider.dart';
 
 class FridgeControlsBar extends ConsumerWidget {
   const FridgeControlsBar({super.key});

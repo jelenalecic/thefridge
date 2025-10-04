@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thefridge/core/coloring/colors.dart';
-import 'package:thefridge/features/fridge/ui/widgets/fridge_overview_screen.dart'
+import 'package:thefridge/features/fridge/presentation/widgets/fridge_overview_screen.dart'
     show FridgeScreen;
 
 class RootAppWidget extends ConsumerStatefulWidget {

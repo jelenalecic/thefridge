@@ -5,7 +5,7 @@ import 'package:thefridge/core/widgets/fade_slide_in_widget.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_category.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_item.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_unit.dart';
-import 'package:thefridge/features/fridge/ui/widgets/fridge_item_preview_dialog.dart';
+import 'package:thefridge/features/fridge/presentation/widgets/fridge_item_preview_dialog.dart';
 
 class FridgeGridItem extends StatelessWidget {
   const FridgeGridItem({

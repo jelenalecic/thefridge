@@ -27,6 +27,9 @@ Built for the Hylastix candidate test – focus on **frontend**.
 - **SharedPreferences** as local persistence (fake backend)
 - **Font Awesome** for icons
 - Simple theming system (light/dark)
+- **Clean architecture**, **feature-based folder structure**
+    - Clear separation of **data**, **domain**, and **presentation (UI)** layers
+    - Each feature (e.g., Fridge) organized as an independent module with its own models, logic, and UI
 
 ---
 
@@ -35,13 +38,13 @@ Built for the Hylastix candidate test – focus on **frontend**.
 - Pull requests used for merging
 - Clear history of incremental changes
 
-I also added a simple GitHub Actions workflow (**Flutter CI**) which runs on each push/PR:
+Includes a simple **GitHub Actions** workflow (**Flutter CI**) that runs on each push/PR:
 - installs Flutter
 - fetches dependencies
 - runs `flutter analyze`
 - checks formatting with `dart format --set-exit-if-changed .`
 
-This ensures the repo stays clean and consistent.
+This keeps the repo clean and consistent.
 
 ---
 
