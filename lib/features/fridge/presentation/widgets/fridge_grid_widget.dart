@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thefridge/features/fridge/domain/models/fridge_item.dart';
-import 'package:thefridge/features/fridge/ui/widgets/fridge_grid_item.dart';
+import 'package:thefridge/features/fridge/presentation/widgets/fridge_grid_item.dart';
 
 class FridgeGridWidget extends StatelessWidget {
   const FridgeGridWidget({
